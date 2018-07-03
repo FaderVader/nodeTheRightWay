@@ -7,7 +7,7 @@ if (!fileName) {
     throw Error('Error: no filename provided.');
 }
 
-net.createServer(connection => {
+net.createServer(connection => {  // 'connection' parameter is a Socket-object 
     console.log('Subscriber connected');
     connection.write(JSON.stringify({type: 'watching', file: fileName}) + '\n');
 
