@@ -1,7 +1,7 @@
 const EventEmitter = require('events').EventEmitter;
 
 class LDJClient extends EventEmitter {
-    constructor(stream)  {    // expected arg: data-emitting object, like Socket
+    constructor(stream)  { // expected arg: data-emitting object, like Socket
         super();
         let buffer = '';
 

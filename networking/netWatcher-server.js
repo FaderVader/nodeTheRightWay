@@ -19,4 +19,8 @@ net.createServer(connection => {
         console.log('Client disconnected.')
         watcher.close();
     })
+
+    connection.on('error', (error) => {
+        console.log(`Connection error: ${error.message}`);
+    })
 }).listen(60300, () => console.log('Now listening for clients.'));

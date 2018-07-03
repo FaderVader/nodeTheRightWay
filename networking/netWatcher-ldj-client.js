@@ -12,3 +12,7 @@ ldjClient.on('message', message => {
         throw Error(`Unrecognized message type: ${message.type}`);
     }
 })
+
+ldjClient.on('error', error => {
+    console.log(`Error: ${error.message}`);
+})

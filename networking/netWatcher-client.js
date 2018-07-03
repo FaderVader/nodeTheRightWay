@@ -1,6 +1,6 @@
 'use strict';
 const net = require('net');
-const client = net.connect({ port: 60300 });
+const client = net.connect({ port: 60300 }); // client is a Socket-object
 
 client.on('data', data => {
     const message = JSON.parse(data);
