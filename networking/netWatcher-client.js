@@ -9,6 +9,7 @@ if (!serverAddres) {
 const net = require('net');
 const client = net.connect({ port: 60300, host: serverAddres });  //'192.168.1.199'
 
+
 client.on('data', data => {
     const message = JSON.parse(data);
 
