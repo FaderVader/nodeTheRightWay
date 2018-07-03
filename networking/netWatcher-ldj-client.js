@@ -1,6 +1,12 @@
 'use strict';
+const serverAddress = process.argv[2];
 
-const netClient = require('net').connect({port:60300});
+if (!serverAddress) {
+    console.log('Error - no host specified');
+    process.exit();
+}
+
+const netClient = require('net').connect({port:60300, host: serverAddress});
 const ldjClient = require('./lib/ldj-client').connect(netClient);
 
 ldjClient.on('message', message => {
