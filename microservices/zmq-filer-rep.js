@@ -10,7 +10,7 @@ responder.on('message', data => {
     });
 });
 
-responder.bind('tcp://127.0.0.1:60401', err => {
+responder.bind('tcp://*:60401', err => {
     console.log('Listening for ZMQ requesters');
 });
 
