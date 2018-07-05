@@ -12,9 +12,9 @@ fs.watch(fileName, () => {
         file: fileName,
         timestamp: Date.now()
     }));
+})
 
-    publisher.bind('tcp://*:60400', err => {
-        if (err) { throw err}
-        console.log('Listening for zmq subscribers');
-    })
+publisher.bind('tcp://*:60400', err => {
+    if (err) { throw err }
+    console.log('Listening for zmq subscribers');
 })
