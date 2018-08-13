@@ -17,6 +17,9 @@ requester.on('message', data => {
 
 requester.connect(`tcp://${hostAddress}:60401`);
 
-console.log(`Sending a request for: ${fileName}`);
-requester.send(JSON.stringify({ path: fileName}));
+for (let i = 0; i < 5; i++) {
+    console.log(`Sending request ${i} for: ${fileName}`);
+    requester.send(JSON.stringify({ path: fileName }));
+}
+
 
