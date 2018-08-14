@@ -36,7 +36,7 @@ program // config of available options for application
 
 program     // define command >url<
 .command('url [path]')
-.description('generate the URL for the option sand path (default is /)')
+.description('generate the URL for the options and path (default is /)')
 .action((path = '/') =>  console.log(fullUrl(path)))
 
 program     // define command >get<
