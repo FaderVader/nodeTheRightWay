@@ -17,6 +17,9 @@ app.get('/api/version', (req, res) => {
     res.status(200).send(pkg.version);
 });
 
+// the app instance is passed to the required module (search.js)
+require('./lib/search.js')(app, nconf.get('es'));
+
 app.listen(nconf.get('port'), () => {
     console.log(`Ready @ port ${nconf.get('port')}`);
-})
+});
