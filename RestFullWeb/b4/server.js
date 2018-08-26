@@ -19,6 +19,7 @@ app.get('/api/version', (req, res) => {
 
 // the app instance is passed to the required module (search.js)
 require('./lib/search.js')(app, nconf.get('es'));
+require('./lib/bundle.js')(app, nconf.get('es'));
 
 app.listen(nconf.get('port'), () => {
     console.log(`Ready @ port ${nconf.get('port')}`);

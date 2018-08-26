@@ -3,6 +3,7 @@
 'use strict';
 
 const request = require('request');
+const rp = require('request-promise');
 
 // the app variable is supplied at the consumer (b4/server.js) when the module is required 
 // = module injection
@@ -49,6 +50,47 @@ module.exports = (app, es) => {
             //  return _source;
             // )};
         });
+    });
+
+    app.get('/api/suggest/:field/:query', (req, res) => {
+
+        const esReqBody = {
+            size: 0,
+            suggest: {
+                suggestions: {
+                    text: req.params.query,
+                    term: {
+                        field: req.params.field,
+                        suggest_mode: 'always',
+                    }
+                }
+            }
+        };
+
+        rp.get({ url, json: true, body: esReqBody })
+            .then(esResBody => res.status(200).json(esResBody.suggest.suggestions))
+            .catch(({ error }) => res.status(error.status || 502).json(error));
+
+        // WHEN using non-promises returning request
+        // const options = { url, json: true, body:esReqBody};
+        // const promise = new Promise((resolve, reject) => {
+        //     request.get(options, (err, esRes, esResBody) => {
+        //         if (err) {
+        //             reject(err);
+        //             return;
+        //         }
+
+        //         if (esRes.statusCode != 200){
+        //             reject({error: esResBody});
+        //         }
+
+        //         resolve(esResBody);
+        //     });
+        // });
+
+        // promise
+        // .then(esResBody => res.status(200).json(esResBody.suggest.suggestions))
+        // .catch(({error}) => res.status(error.status || 502).json(error));
     });
 };
 
