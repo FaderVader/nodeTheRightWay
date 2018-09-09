@@ -9,13 +9,11 @@ const rp = require('request-promise');
 // = module injection
 module.exports = (app, es) => {
 
-    const url = `http://${es.host}:${es.port}/${es.books_index}/book/_search`;
+    const url = `http://${es.host}:${es.port}/${es.books_index}/book/_search`;    
     
     // Search for books by matching a particular field value.
-    // Example: api/search/books/author/Twain
+    // Example: api/search/books/authors/Twain
     app.get('/api/search/books/:field/:query', (req, res) => {
-
-        console.log(url);
 
         const esReqBody = {
             size: 10,
@@ -26,11 +24,16 @@ module.exports = (app, es) => {
             }
         };
 
+        // exposing the options-object for peeking!
+        console.log('URL:' + url);
+        console.log('options key:'+ Object.keys(esReqBody.query.match));
+        console.log('options value:'+ esReqBody.query.match[Object.keys(esReqBody.query.match)]);   // 
+
         const options = { url, json: true, body: esReqBody };
 
         request.get(options, (err, esRes, esResBody) => {
             if (err) {
-                res.statusCode(502).json({
+                res.status(502).json({
                     error: 'bad gateway',
                     reason: err.code
                 });

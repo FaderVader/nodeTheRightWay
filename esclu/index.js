@@ -32,7 +32,7 @@ program // config of available options for application
     .version(pkg.version)
     .description(pkg.description)
     .usage('[options] <command> [...]')
-    .option('-o, --host <hostname>', 'hostname [localhost]', 'localhost')
+    .option('-o, --host <hostname>', 'hostname [linux]', '192.168.1.103')
     .option('-p, --port <number>', 'port number [9200]', '9200')
     .option('-j, --json', 'format output as json')
     .option('-i, --index <name>', 'which index to use')
